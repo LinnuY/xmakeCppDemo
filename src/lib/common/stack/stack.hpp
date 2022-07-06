@@ -3,30 +3,30 @@
 
 namespace linuy
 {
-    template<class T>
+    template <class T>
     class Stack
     {
     private:
-        const int MAX_SIZE = 1 << 10;
+        const int MAX_SIZE = 512;
         int length;
         int size;
         int byte_size;
-        T * head;
-        T * end;
+        T *head;
+        T *end;
 
         void expansion()
         {
             length += MAX_SIZE;
-            head = (T*) realloc(sizeof(T) * length);
-            return true;
+            head = (T *)realloc(head, sizeof(T) * length);
         }
+
     public:
         Stack()
         {
             size = 0;
-            byte_size = sizeof(T)/sizeof(int);
+            byte_size = sizeof(T) / sizeof(int);
             length = MAX_SIZE;
-            head = (T*) malloc(sizeof(T) * length);
+            head = (T *)malloc(sizeof(T) * length);
             end = head;
         }
 
@@ -43,9 +43,9 @@ namespace linuy
             end -= byte_size;
         }
 
-        void push(T & element)
+        void push(const T &element)
         {
-            if (size + 1= length)
+            if (size + 1 == length)
             {
                 expansion();
             }
@@ -59,9 +59,14 @@ namespace linuy
             return *end;
         }
 
-        int size()
+        int getSize()
         {
             return size;
+        }
+
+        int getLength()
+        {
+            return length;
         }
 
         bool empty()

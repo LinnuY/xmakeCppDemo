@@ -1,4 +1,4 @@
-#include "interface.h"
+#include "interface.hpp"
 
 int add(int a, int b)
 {
