@@ -1,4 +1,4 @@
-#include "interface.h"
+#include "lib/interface/interface.h"
 #include <iostream>
 
 using namespace std;

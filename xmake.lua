@@ -2,7 +2,7 @@ add_rules("mode.debug", "mode.release")
 
 target("xmakeCppDemo")
     set_kind("shared")
-    add_files("src/interface.cpp")
+    add_files("src/lib/**.cpp")
 
 target("xmakeCppDemo_demo")
     set_kind("binary")
