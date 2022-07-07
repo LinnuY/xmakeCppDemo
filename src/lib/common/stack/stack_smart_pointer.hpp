@@ -13,48 +13,39 @@ namespace linuy
         int size;
         int byte_size;
         std::shared_ptr<T> head;
-        std::shared_ptr<T> end;
 
         void expansion()
         {
             length += MAX_SIZE;
-            head = std::make_shared()
-            head = (T *)realloc(head, sizeof(T) * length);
+            head.reset(std::make_shared<T>(length));
         }
 
     public:
-        Stack() : size(0), byte_size(sizeof(T) / sizeof(int)), length(MAX_SIZE)
-        {
-            head = std::make_shared(length, T);
-            end = head;
-        }
+        StackSmartPointer() : size(0), byte_size(sizeof(T) / sizeof(int)), length(MAX_SIZE), head(std::make_shared<T>(length)) {}
 
-        ~Stack()
+        ~StackSmartPointer()
         {
             head.reset();
-            end.reset();
         }
 
         void pop()
         {
             size--;
-            end -= byte_size;
         }
 
-        void push(const T &element)
+        void push(const T & element)
         {
             if (size + 1 == length)
             {
                 expansion();
             }
             size++;
-            end += byte_size;
-            *end = element;
+            head.get()[size] = element;
         }
 
         T top()
         {
-            return *end;
+            return head.get()[size];
         }
 
         int getSize()
@@ -69,7 +60,7 @@ namespace linuy
 
         bool empty()
         {
-            return head == end;
+            return !size;
         }
     };
 }

@@ -1,12 +1,12 @@
 #include "lib/interface/interface.hpp"
-#include "lib/common/stack/stack.hpp"
+#include "lib/common/stack/stack_smart_pointer.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
-    linuy::Stack<int> numberStack;
+    linuy::StackSmartPointer<int> numberStack;
 
     numberStack.push(128);
     numberStack.push(64);
