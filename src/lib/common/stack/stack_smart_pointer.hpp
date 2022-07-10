@@ -11,17 +11,21 @@ namespace linuy
         const int MAX_SIZE = 512;
         int length;
         int size;
-        int byte_size;
-        std::shared_ptr<T> head;
+        std::unique_ptr<T> head;
 
         void expansion()
         {
             length += MAX_SIZE;
-            head.reset(std::make_shared<T>(length));
+            auto temp = std::make_unique<T>(length);
+            for (int i = 0; i < size; i++)
+            {
+                temp[i] = head[i];
+            }
+            head = temp;
         }
 
     public:
-        StackSmartPointer() : size(0), byte_size(sizeof(T) / sizeof(int)), length(MAX_SIZE), head(std::make_shared<T>(length)) {}
+        StackSmartPointer() : size(0), length(MAX_SIZE), head(std::make_unique<T>(length)) {}
 
         ~StackSmartPointer()
         {
