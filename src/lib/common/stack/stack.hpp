@@ -12,7 +12,6 @@ namespace linuy
         int size;
         int byte_size;
         T *head;
-        T *end;
 
         void expansion()
         {
@@ -27,20 +26,18 @@ namespace linuy
             byte_size = sizeof(T) / sizeof(int);
             length = MAX_SIZE;
             head = (T *)malloc(sizeof(T) * length);
-            end = head;
         }
 
         ~Stack()
         {
             free(head);
             head = nullptr;
-            end = nullptr;
         }
 
         void pop()
         {
-            size--;
-            end -= byte_size;
+            if (size - 1 != 0)
+                size--;
         }
 
         void push(const T &element)
@@ -50,8 +47,7 @@ namespace linuy
                 expansion();
             }
             size++;
-            end += byte_size;
-            *end = element;
+            head[size] = element;
         }
 
         T top()
@@ -71,7 +67,7 @@ namespace linuy
 
         bool empty()
         {
-            return head == end;
+            return size == 0;
         }
     };
 }
