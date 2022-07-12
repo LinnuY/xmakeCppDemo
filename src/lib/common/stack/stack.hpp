@@ -52,7 +52,7 @@ namespace linuy
 
         T top()
         {
-            return *end;
+            return head[size];
         }
 
         int getSize()
